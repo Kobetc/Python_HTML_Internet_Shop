@@ -1,7 +1,8 @@
 import base64
 import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app_dir = os.path.abspath(os.path.dirname(__file__))
@@ -16,7 +17,10 @@ db = SQLAlchemy(app)
 
 app.app_context().push()
 
-class User(db.Model):
+###
+### DB Models ###
+###
+class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer(), primary_key=True)
@@ -34,7 +38,7 @@ class User(db.Model):
     def check_password(self,  password: str):
         return check_password_hash(self.password_hash, password)
     
-class Position(db.Model):
+class PositionModel(db.Model):
     __tablename__ = 'positions'
 
     id = db.Column(db.Integer(), primary_key=True)
@@ -44,7 +48,7 @@ class Position(db.Model):
     def __repr__(self):
         return "<{}:{}>".format(self.id, self.name)
     
-class Image(db.Model):
+class ImageModel(db.Model):
     __tablename__ = 'images'
 
     id = db.Column(db.Integer(), primary_key=True)
@@ -55,7 +59,10 @@ class Image(db.Model):
     def __repr__(self):
         return "<{}:{}>".format(self.id, self.name)
 
-
+###
+### Routes ###
+###
+    
 @app.route('/')
 def home_page():
     return render_template('index.html')
@@ -64,11 +71,11 @@ def home_page():
 def about_page():
     return render_template('about.html')
 
-@app.route('/image')
-def image_page():
-    file_data = Image.query.filter_by(position_id=1).first()
+@app.route('/images')
+def images_page():
+    file_data = ImageModel.query.filter_by(position_id=1).first()
     image = base64.b64encode(file_data.data).decode('ascii')
-    return render_template('image.html', image=image)
+    return render_template('images.html')
 
 @app.route('/add_user', methods=[ 'POST', 'GET'])
 def add_user_page():
@@ -79,9 +86,9 @@ def add_user_page():
         userEmail = request.form['email']
         userPassword = request.form['password']
 
-        isUserNameExist = User.query.filter_by(name=userName).first()
-        isUserLoginExist = User.query.filter_by(login=userLogin).first()
-        isUserEmailExist = User.query.filter_by(email=userEmail).first()
+        isUserNameExist = UserModel.query.filter_by(name=userName).first()
+        isUserLoginExist = UserModel.query.filter_by(login=userLogin).first()
+        isUserEmailExist = UserModel.query.filter_by(email=userEmail).first()
 
         if (isUserNameExist != None):
             return 'ОШИБКА !!! Пользователь с таким именем существует.'
@@ -93,7 +100,7 @@ def add_user_page():
         print(isUserNameExist, isUserLoginExist, isUserEmailExist)
         print(userName, userLogin, userEmail, userPassword)
 
-        newUser = User(
+        newUser = UserModel(
             name = userName,
             login = userLogin,
             email = userEmail,
@@ -109,6 +116,7 @@ def add_user_page():
             return 'ОШИБКА !!! При сохранении пользователя в базу.'
     else:
         return render_template('add_user.html')
-
+    
+    
 if __name__ == '__main__':
     app.run(debug = True)
