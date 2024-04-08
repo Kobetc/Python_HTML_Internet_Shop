@@ -1,3 +1,4 @@
+import base64
 import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -37,8 +38,19 @@ class Position(db.Model):
     __tablename__ = 'positions'
 
     id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), unique=True)
     discription = db.Column(db.Text, nullable=True)
+
+    def __repr__(self):
+        return "<{}:{}>".format(self.id, self.name)
+    
+class Image(db.Model):
+    __tablename__ = 'images'
+
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(100), unique=True)
+    data = db.Column(db.BLOB, nullable=False)
+    position_id = db.Column(db.Integer())
 
     def __repr__(self):
         return "<{}:{}>".format(self.id, self.name)
@@ -51,6 +63,12 @@ def home_page():
 @app.route('/about')
 def about_page():
     return render_template("about.html")
+
+@app.route('/image')
+def image_page():
+    file_data = Image.query.filter_by(position_id=1).first()
+    image = base64.b64encode(file_data.data).decode('ascii')
+    return render_template('image.html', image=image)
 
 if __name__ == "__main__":
     app.run(debug = True)
