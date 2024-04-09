@@ -1,5 +1,6 @@
-import base64
 import os
+import base64
+
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -31,12 +32,6 @@ class UserModel(db.Model):
 
     def __repr__(self):
         return "<{}:{}>".format(self.id, self.name, self.email, self.login)
-    
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self,  password: str):
-        return check_password_hash(self.password_hash, password)
     
 class PositionModel(db.Model):
     __tablename__ = 'positions'
@@ -73,9 +68,10 @@ def about_page():
 
 @app.route('/images')
 def images_page():
-    file_data = ImageModel.query.filter_by(position_id=1).first()
-    image = base64.b64encode(file_data.data).decode('ascii')
-    return render_template('images.html')
+    imagesFromQuery = ImageModel.query.filter_by(position_id=1).all()
+    images = [ base64.b64encode(image.data).decode('ascii') for image in imagesFromQuery ]
+
+    return render_template('images.html', images=images)
 
 @app.route('/add_user', methods=[ 'POST', 'GET'])
 def add_user_page():
@@ -97,9 +93,6 @@ def add_user_page():
         if (isUserEmailExist != None):
             return 'ОШИБКА !!! Пользователь с таким адресом почты существует.'
 
-        print(isUserNameExist, isUserLoginExist, isUserEmailExist)
-        print(userName, userLogin, userEmail, userPassword)
-
         newUser = UserModel(
             name = userName,
             login = userLogin,
@@ -117,6 +110,33 @@ def add_user_page():
     else:
         return render_template('add_user.html')
     
+@app.route('/add_images', methods=[ 'POST', 'GET'])
+def add_images_page():
+    if request.method == 'POST':
+        file = request.files['uploadImage']
+
+        isFileNameExist = ImageModel.query.filter_by(name=file.filename).first()
+
+        if (isFileNameExist != None):
+            return render_template('add_images.html')
+
+        fileData = file.read()
+
+        newImage = ImageModel(
+            name = file.filename,
+            data = fileData,
+            position_id = 1
+        )
+
+        try:
+            db.session.add(newImage)
+        except:
+            return 'ОШИБКА !!! При сохранении изображения в базу.'
+            
+        db.session.commit()
+
+    return render_template('add_images.html')
     
+
 if __name__ == '__main__':
     app.run(debug = True)

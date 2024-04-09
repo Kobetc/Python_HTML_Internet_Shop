@@ -5,9 +5,19 @@
 {% endblock %}
 
 {% block body %}
-<main>
-    <div>
+
+<div class="row p-3">
+    <div class="col p-3">
+        <h1>Изображения товара</h1>
+    </div>
+</div>
+
+{% for image in images %}
+<div class="row p-3">
+    <div class="col p-3">
         <img src="data:;base64,{{ image }}" />
     </div>
-</main>
+</div>
+{% endfor %}
+
 {% endblock %}
