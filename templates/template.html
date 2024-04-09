@@ -21,7 +21,24 @@
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Список позиций</a>
-                    <a class="py-2 link-body-emphasis text-decoration-none" href="/about">О сайте</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="/about" style="margin-right: 100px;">О
+                        сайте</a>
+
+                    {% if isUserLogin == False and isClientLogin == False %}
+
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/client_login"
+                        style="text-align: end;">Вход
+                        как
+                        покупатель</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="/user_login"
+                        style="text-align: end;">Вход
+                        как администратор</a>
+
+                    {% else %}
+
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="/logout">Выход</a>
+
+                    {% endif %}
                 </nav>
 
             </div>
@@ -37,23 +54,33 @@
                 <div class="col-12 col-md">
                     <small class="d-block mb-3 text-body-secondary">© 2024</small>
                 </div>
-                <div class="col-6 col-md">
-                    <h5>Разделы сайта</h5>
-                    <ul class="list-unstyled text-small">
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Главная</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Список позиций</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/about">О сайте</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
+
+                {% if isUserLogin == True %}
+
+                <div class="col-6 col-md" style="text-align: end;">
                     <h5>Добавление пользователей</h5>
                     <ul class="list-unstyled text-small">
                         <li class="mb-1"><a class="link-secondary text-decoration-none" href="/add_new_user">Добавление
                                 нового
                                 администратора</a></li>
                     </ul>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/users_list">Просмотр
+                                списка администраторов</a></li>
+                    </ul>
+                    <h5>Добавление клиентов</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none"
+                                href="/add_new_client">Добавление
+                                нового
+                                клиента</a></li>
+                    </ul>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/clients_list">Просмотр
+                                списка клиентов</a></li>
+                    </ul>
                 </div>
-                <div class="col-6 col-md">
+                <div class="col-6 col-md" style="text-align: end;">
                     <h5>Добавление элементов</h5>
                     <ul class="list-unstyled text-small">
                         <li class="mb-1"><a class="link-secondary text-decoration-none"
@@ -61,7 +88,7 @@
                                 позиции</a></li>
                     </ul>
                 </div>
-                <div class="col-6 col-md">
+                <div class="col-6 col-md" style="text-align: end;">
                     <h5>Просмотр/Редактирование</h5>
                     <ul class="list-unstyled text-small">
                         <li class="mb-1"><a class="link-secondary text-decoration-none" href="/positions_list">Просмотр
@@ -72,6 +99,37 @@
                                 загруженных изображений</a></li>
                     </ul>
                 </div>
+
+                {% else %}
+
+                <div class="col-6 col-md"></div>
+                <div class="col-6 col-md"> </div>
+                <div class="col-6 col-md"></div>
+
+                {% endif %}
+
+                <div class="col-6 col-md" style="text-align: end;">
+                    <h5>Разделы сайта</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Главная</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Список позиций</a></li>
+                        <li class="mb-3"><a class="link-secondary text-decoration-none" href="/about">О сайте</a></li>
+
+                        {% if isUserLogin == False and isClientLogin == False %}
+
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Вход как покупател</a>
+                        </li>
+                        <li class="mb-3"><a class="link-secondary text-decoration-none" href="/user_login">Вход как
+                                администратор</a></li>
+
+                        {% else %}
+
+                        <li class="mb-3"><a class="link-secondary text-decoration-none" href="/logout">Выход</a></li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+
             </div>
         </footer>
 

@@ -1,7 +1,8 @@
 from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy):
+
+def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy, autorization):
 
     if request.method == 'POST':
         images = list(request.files.listvalues())[0]
@@ -48,4 +49,4 @@ def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy):
                 except:
                     return 'ОШИБКА !!! При сохранении изображения в базу.'
                 
-    return render_template('add_new_position.html')
+    return render_template('add_new_position.html', isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
