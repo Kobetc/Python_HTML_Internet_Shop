@@ -2,8 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 def createPositionModel(db: SQLAlchemy):
-
     class PositionModel(db.Model):
+
         __tablename__ = 'positions'
 
         id = db.Column(db.Integer(), primary_key=True)
