@@ -14,7 +14,7 @@
 
 <div class="row p-3">
     <div class="col col-m p-3">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" class="needs-validation">
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="name">Название позиции</span>
                 <input type="text" class="form-control" name="name" id="name" required>
@@ -31,7 +31,8 @@
             </div>
 
             <div class=" input-group flex-nowrap mb-3">
-                <input class="form-control" type="file" name="positionImage" id="positionImage" multiple accept=".jpg">
+                <input class="form-control" type="file" name="positionImage" id="positionImage" multiple accept=".jpg"
+                    required>
             </div>
 
             <div class="input-group flex-nowrap mb-3">

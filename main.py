@@ -10,6 +10,7 @@ from models.image import createImageModel
 from models.position import createPositionModel
 from models.user import createUserModel
 from route_handlers.add_new_position import addNewPositionHandler
+from route_handlers.add_new_user import addNewUserHandler
 from route_handlers.positions_images_list import positionsImagesListHandler
 from route_handlers.positions_list import positionsListHandler
 
@@ -50,42 +51,9 @@ def about_page():
 # Добавление нового пользователя
 #
 
-@app.route('/add_user', methods=[ 'POST', 'GET'])
-def add_user_page():
-
-    if request.method == 'POST':
-        userName = request.form['name']
-        userLogin = request.form['login']
-        userEmail = request.form['email']
-        userPassword = request.form['password']
-
-        isUserNameExist = UserModel.query.filter_by(name=userName).first()
-        isUserLoginExist = UserModel.query.filter_by(login=userLogin).first()
-        isUserEmailExist = UserModel.query.filter_by(email=userEmail).first()
-
-        if (isUserNameExist != None):
-            return 'ОШИБКА !!! Пользователь с таким именем существует.'
-        if (isUserLoginExist != None):
-            return 'ОШИБКА !!! Пользователь с таким логином существует.'
-        if (isUserEmailExist != None):
-            return 'ОШИБКА !!! Пользователь с таким адресом почты существует.'
-
-        newUser = UserModel(
-            name = userName,
-            login = userLogin,
-            email = userEmail,
-            password_hash = generate_password_hash(userPassword)
-        )
-
-        try:
-            db.session.add(newUser)
-            db.session.commit()
-
-            return redirect('/')
-        except:
-            return 'ОШИБКА !!! При сохранении пользователя в базу.'
-    else:
-        return render_template('add_user.html')
+@app.route('/add_new_user', methods=[ 'POST', 'GET'])
+def addNewUser():
+    return addNewUserHandler(UserModel, db)
     
 
 #
