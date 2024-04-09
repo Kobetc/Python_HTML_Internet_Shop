@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 def createUserModel(db: SQLAlchemy):
 
     class UserModel(db.Model):
+        
         __tablename__ = 'users'
 
         id = db.Column(db.Integer(), primary_key=True)

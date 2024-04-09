@@ -9,7 +9,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models.image import createImageModel
 from models.position import createPositionModel
 from models.user import createUserModel
-from route_handlers.images import images_handler
+from route_handlers.add_new_position import addNewPositionHandler
+from route_handlers.positions_images_list import positionsImagesListHandler
+from route_handlers.positions_list import positionsListHandler
+
 
 app_dir = os.path.abspath(os.path.dirname(__file__))
 db_name = 'sqlite.db'
@@ -43,10 +46,9 @@ def home_page():
 def about_page():
     return render_template('about.html')
 
-@app.route('/images', methods=['GET', 'POST'])
-def images():
-    return images_handler(ImageModel, db)
-
+#
+# Добавление нового пользователя
+#
 
 @app.route('/add_user', methods=[ 'POST', 'GET'])
 def add_user_page():
@@ -85,33 +87,31 @@ def add_user_page():
     else:
         return render_template('add_user.html')
     
-@app.route('/add_images', methods=[ 'POST', 'GET'])
-def add_images_page():
-    if request.method == 'POST':
-        file = request.files['uploadImage']
 
-        isFileNameExist = ImageModel.query.filter_by(name=file.filename).first()
+#
+# Добавление новой позиции
+#
 
-        if (isFileNameExist != None):
-            return render_template('add_images.html')
+@app.route('/add_new_position', methods=[ 'POST', 'GET'])
+def addNewPosition():
+    return  addNewPositionHandler(PositionModel, ImageModel, db)
 
-        fileData = file.read()
+#
+# Список изображений всех позиций
+#
 
-        newImage = ImageModel(
-            name = file.filename,
-            data = fileData,
-            position_id = 1
-        )
+@app.route('/positions_images_list', methods=[ 'POST', 'GET'])
+def positionsImagesList():
+    return  positionsImagesListHandler(ImageModel, PositionModel, db)
 
-        try:
-            db.session.add(newImage)
-        except:
-            return 'ОШИБКА !!! При сохранении изображения в базу.'
-            
-        db.session.commit()
+#
+# Список всех позиций
+#
 
-    return render_template('add_images.html')
-    
+@app.route('/positions_list', methods=[ 'POST', 'GET'])
+def positionsList():
+    return  positionsListHandler(PositionModel, ImageModel, db)
 
 if __name__ == '__main__':
+
     app.run(debug = True)

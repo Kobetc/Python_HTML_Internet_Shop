@@ -1,0 +1,40 @@
+{% extends 'template.html' %}
+
+{% block title %}
+<title>Интернет магазин - Добавление новой позиции</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="row p-3">
+    <div class="col p-3">
+        <h1>Добавление новой позиции</h1>
+    </div>
+</div>
+
+<div class="row p-3">
+    <div class="col col-m p-3">
+        <form method="post" enctype="multipart/form-data">
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="name">Название позиции</span>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="discription">Описание позиции</span>
+                <textarea class="form-control" name="discription" id="discription" rows="5"></textarea>
+            </div>
+
+            <div class="input-group flex-nowrap mb-3">
+                <input class="form-control" type="file" name="positionImage" id="positionImage" multiple accept=".jpg">
+            </div>
+
+            <div class="input-group flex-nowrap mb-3">
+                <button type="submit" class="btn btn-primary mb-3">Создать позицию</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
