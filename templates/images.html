@@ -8,16 +8,49 @@
 
 <div class="row p-3">
     <div class="col p-3">
-        <h1>Изображения товара</h1>
+        <h1>Изображения товаров</h1>
     </div>
 </div>
 
-{% for image in images %}
-<div class="row p-3">
-    <div class="col p-3">
-        <img src="data:;base64,{{ image }}" />
+
+
+<form method="post">
+
+    <div class="row p-3">
+
+        {% for image in images %}
+
+        <div class="col p-3">
+            <div class="card mb-3 rounded-3 shadow-sm text-center" style="width: 400px">
+
+                <div class="card-header"
+                    style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <h5>{{ image['name'] }} {{ image['id'] }}</h5>
+                </div>
+
+                <div class="card-body text-muted"
+                    style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <h6>{{ image['position'] }}</h6>
+                </div>
+
+                <div class="card-body" style="height: 300px;">
+                    <img src="data:;base64,{{ image['data'] }}"
+                        style="object-fit: scale-down; max-width: 300px; max-height: 250px;" />
+                </div>
+
+                <div class="card-footer"
+                    style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="w-100 btn btn-m btn-outline-secondary"
+                        name="id" value="{{ image['id'] }}" >Удалить изображение</button>
+                </div>
+
+            </div>
+        </div>
+
+        {% endfor %}
     </div>
-</div>
-{% endfor %}
+</form>
+
+
 
 {% endblock %}
