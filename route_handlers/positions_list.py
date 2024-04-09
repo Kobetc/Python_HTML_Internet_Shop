@@ -21,17 +21,22 @@ def positionsListHandler(PositionModel, ImageModel, db: SQLAlchemy):
     positions = []
 
     for position in positionsFromQuery:
-        positionImages = ImageModel.query.filter_by(position_id = position.id).all()
+        imagesFromQuery = ImageModel.query.filter_by(position_id = position.id).all()
+
+        positionImages = []
+        for image in imagesFromQuery:
+            if len(image.name):
+                positionImages.append({
+                    'name': image.name, 
+                    'data': base64.b64encode(image.data).decode('ascii')
+                })
 
         positions.append({
             'id': position.id, 
             'name': position.name, 
             'discription': position.discription,
-            'positionImages': [ 
-                {
-                    'name': image.name, 
-                    'data': base64.b64encode(image.data).decode('ascii')
-                } for image in positionImages ]
+            'price': position.price,
+            'positionImages': positionImages
             })
 
     return render_template('positions_list.html', positions=positions)

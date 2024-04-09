@@ -8,7 +8,7 @@
 
 <div class="row p-3">
     <div class="col p-3">
-        <h1>Добавление новой позиции</h1>
+        <h3>Добавление новой позиции</h3>
     </div>
 </div>
 
@@ -17,15 +17,20 @@
         <form method="post" enctype="multipart/form-data">
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="name">Название позиции</span>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" required>
             </div>
 
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="discription">Описание позиции</span>
-                <textarea class="form-control" name="discription" id="discription" rows="5"></textarea>
+                <textarea class="form-control" name="discription" id="discription" rows="5" required></textarea>
             </div>
 
             <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="price">Цена позиции</span>
+                <input type="number" class="form-control" name="price" id="price" step="0.01" min="0.01" required>
+            </div>
+
+            <div class=" input-group flex-nowrap mb-3">
                 <input class="form-control" type="file" name="positionImage" id="positionImage" multiple accept=".jpg">
             </div>
 
