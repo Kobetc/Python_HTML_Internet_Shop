@@ -1,35 +1,35 @@
 {% extends 'template.html' %}
 
 {% block title %}
-<title>Document</title>
+<title>Интернет-магазин - Добавление нового администратора</title>
 {% endblock %}
 
 {% block body %}
 
 <div class="row p-3">
     <div class="col p-3">
-        <h1>Добавить нового пользователя</h1>
+        <h1>Добавление нового администратора</h1>
     </div>
 </div>
 
 <div class="row p-3">
     <div class="col col-m p-3">
-        <form method="post">
+        <form method="post" class="needs-validation">
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="name">Имя пользователя</span>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" required>
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="email">E-Mail</span>
-                <input type="text" class="form-control" name="email" id="email">
+                <input type="text" class="form-control" name="email" id="email" required>
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="login">Логин</span>
-                <input type="text" class="form-control" name="login" id="login">
+                <input type="text" class="form-control" name="login" id="login" required>
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="password">Пароль</span>
-                <input type="password" class="form-control" name="password" id="password">
+                <input type="password" class="form-control" name="password" id="password" required>
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <button type="submit" class="btn btn-primary mb-3">Создать пользователя</button>

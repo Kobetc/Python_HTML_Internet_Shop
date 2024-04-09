@@ -11,9 +11,9 @@
 </head>
 
 <body>
-    <div class="container-fluid p-3">
+    <div class="container-fluid p-3" style="min-height: 100vh">
         <header>
-            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+            <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
                 <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
                     <span class="fs-4">Интернет магазин</span>
                 </a>
@@ -21,18 +21,18 @@
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Список позиций</a>
-                    <a class="py-2 link-body-emphasis text-decoration-none" href="/">О сайте</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="/about">О сайте</a>
                 </nav>
 
             </div>
         </header>
-        <main>
+        <main style="min-height: 55vh">
 
             {% block body %}{% endblock%}
 
         </main>
 
-        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <footer class="pt-4 my-md-5 pt-md-5 p-3 border-top">
             <div class="row">
                 <div class="col-12 col-md">
                     <small class="d-block mb-3 text-body-secondary">© 2024</small>
@@ -42,13 +42,14 @@
                     <ul class="list-unstyled text-small">
                         <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Главная</a></li>
                         <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Список позиций</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">О сайте</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/about">О сайте</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md">
                     <h5>Добавление пользователей</h5>
                     <ul class="list-unstyled text-small">
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Добавление нового
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/add_new_user">Добавление
+                                нового
                                 администратора</a></li>
                     </ul>
                 </div>
