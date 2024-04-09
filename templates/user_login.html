@@ -1,0 +1,33 @@
+{% extends 'template.html' %}
+
+{% block title %}
+<title>Интернет-магазин - Вход администратора</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="row p-3">
+    <div class="col p-3">
+        <h1>Вход администратора</h1>
+    </div>
+</div>
+
+<div class="row p-3">
+    <div class="col col-m p-3">
+        <form method="post" class="needs-validation">
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="login">Логин</span>
+                <input type="text" class="form-control" name="login" id="login" required>
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="password">Пароль</span>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <button type="submit" class="btn btn-primary mb-3">Войти</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
