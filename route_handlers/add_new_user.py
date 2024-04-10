@@ -24,10 +24,10 @@ def addNewUserHandler(UserModel, db: SQLAlchemy, autorization):
             return 'ОШИБКА !!! Пользователь с таким адресом почты существует.'
 
         newUser = UserModel(
-            name = userName,
-            login = userLogin,
-            email = userEmail,
-            password_hash = generate_password_hash(userPassword)
+            name=userName,
+            login=userLogin,
+            email=userEmail,
+            password_hash=generate_password_hash(userPassword)
         )
 
         try:
@@ -38,4 +38,4 @@ def addNewUserHandler(UserModel, db: SQLAlchemy, autorization):
         except:
             return 'ОШИБКА !!! При сохранении пользователя в базу.'
     else:
-        return render_template('add_new_user.html', autorization = autorization)
+        return render_template('add_new_user.html', autorization=autorization)

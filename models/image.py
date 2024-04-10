@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 def createImageModel(db: SQLAlchemy):
     class ImageModel(db.Model):
-        
+
         __tablename__ = 'images'
 
         id = db.Column(db.Integer(), primary_key=True)
@@ -15,4 +15,3 @@ def createImageModel(db: SQLAlchemy):
             return "<{}:{}>".format(self.id, self.name)
 
     return ImageModel
-        
