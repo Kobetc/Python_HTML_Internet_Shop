@@ -1,10 +1,12 @@
 import os
+from typing import Type
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from autorization import Autorization
+from models.basket import createBasketModel
 from models.category import createCategoryModel
 from models.client import createClientModel
 from models.image import createImageModel
@@ -38,6 +40,7 @@ app.app_context().push()
 ### DB Models ###
 ###
 
+BasketModel = createBasketModel(db)
 CategoryModel = createCategoryModel(db)
 ImageModel = createImageModel(db)
 PositionModel = createPositionModel(db)
@@ -84,7 +87,7 @@ def categoriesList():
 
 @app.route('/add_new_position', methods=[ 'POST', 'GET'])
 def addNewPosition():
-    return  addNewPositionHandler(PositionModel, ImageModel, db, autorization)
+    return  addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db, autorization)
 
 #
 # Список изображений всех позиций
@@ -100,7 +103,7 @@ def positionsImagesList():
 
 @app.route('/positions_list', methods=[ 'POST', 'GET'])
 def positionsList():
-    return  positionsListHandler(PositionModel, ImageModel, db, autorization)
+    return  positionsListHandler(PositionModel, ImageModel, CategoryModel, db, autorization)
 
 #
 # Разлогин пользователя или покупателя

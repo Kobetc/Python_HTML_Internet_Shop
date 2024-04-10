@@ -1,8 +1,12 @@
+from typing import Type
 from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy, autorization):
+def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization):
+
+    categoriesList = CategoryModel.query.all()
+    print(categoriesList)
 
     if request.method == 'POST':
         images = list(request.files.listvalues())[0]
@@ -10,6 +14,7 @@ def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy, autorizatio
         positionName = request.form['name']
         positionDiscription = request.form['discription']
         positionPrice = request.form['price']
+        positionCategoryId = request.form['category_id']
 
         isUserPositionExist = PositionModel.query.filter_by(name=positionName).first()
         if (isUserPositionExist != None):
@@ -18,7 +23,8 @@ def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy, autorizatio
         newPosition = PositionModel(
             name = positionName,
             discription = positionDiscription,
-            price = positionPrice
+            price = positionPrice,
+            category_id = positionCategoryId
         )
 
         try:
@@ -49,4 +55,4 @@ def addNewPositionHandler(PositionModel, ImageModel, db: SQLAlchemy, autorizatio
                 except:
                     return 'ОШИБКА !!! При сохранении изображения в базу.'
                 
-    return render_template('add_new_position.html', autorization = autorization)
+    return render_template('add_new_position.html', categoriesList = categoriesList, autorization = autorization)

@@ -4,7 +4,7 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def positionsListHandler(PositionModel, ImageModel, db: SQLAlchemy, autorization):
+def positionsListHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization):
 
     if request.method == 'POST':
         positionId = request.form['id']
@@ -31,11 +31,18 @@ def positionsListHandler(PositionModel, ImageModel, db: SQLAlchemy, autorization
                     'data': base64.b64encode(image.data).decode('ascii')
                 })
 
+        positionCategoryName = ""
+        categoryFromQuery = CategoryModel.query.filter_by(id = position.category_id).first()
+
+        if categoryFromQuery != None:
+            positionCategoryName = categoryFromQuery.name
+
         positions.append({
             'id': position.id, 
             'name': position.name, 
             'discription': position.discription,
             'price': position.price,
+            'categoryName': positionCategoryName,
             'positionImages': positionImages
             })
 
