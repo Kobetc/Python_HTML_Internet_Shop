@@ -10,14 +10,15 @@ def addNewCategoryHandler(CategoryModel, db: SQLAlchemy, autorization):
         categoryName = request.form['name']
         categoryDiscription = request.form['discription']
 
-        isCategoryNameExist = CategoryModel.query.filter_by(name=categoryName).first()
+        isCategoryNameExist = CategoryModel.query.filter_by(
+            name=categoryName).first()
 
         if (isCategoryNameExist != None):
             return 'ОШИБКА !!! Категория с таким именем существует.'
 
         newCategory = CategoryModel(
-            name = categoryName,
-            discription = categoryDiscription,
+            name=categoryName,
+            discription=categoryDiscription,
         )
 
         try:
@@ -28,4 +29,4 @@ def addNewCategoryHandler(CategoryModel, db: SQLAlchemy, autorization):
         except:
             return 'ОШИБКА !!! При сохранении категории в базу.'
     else:
-        return render_template('add_new_category.html', autorization = autorization)
+        return render_template('add_new_category.html', autorization=autorization)

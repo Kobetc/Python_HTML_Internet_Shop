@@ -16,15 +16,16 @@ def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlche
         positionPrice = request.form['price']
         positionCategoryId = request.form['category_id']
 
-        isUserPositionExist = PositionModel.query.filter_by(name=positionName).first()
+        isUserPositionExist = PositionModel.query.filter_by(
+            name=positionName).first()
         if (isUserPositionExist != None):
             return 'ОШИБКА !!! Позиция с таким именем существует.'
-        
+
         newPosition = PositionModel(
-            name = positionName,
-            discription = positionDiscription,
-            price = positionPrice,
-            category_id = positionCategoryId
+            name=positionName,
+            discription=positionDiscription,
+            price=positionPrice,
+            category_id=positionCategoryId
         )
 
         try:
@@ -33,10 +34,10 @@ def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlche
         except:
             return 'ОШИБКА !!! При сохранении позиции в базу.'
 
-        newPosition= PositionModel.query.filter_by(name=positionName).first()
+        newPosition = PositionModel.query.filter_by(name=positionName).first()
         if (newPosition == None):
             return 'ОШИБКА !!! Позиция с id не найдена.'
-        
+
         for image in images:
 
             if len(image.filename) > 0:
@@ -44,9 +45,9 @@ def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlche
                 fileData = image.read()
 
                 newImage = ImageModel(
-                    name = image.filename,
-                    data = fileData,
-                    position_id = newPosition.id
+                    name=image.filename,
+                    data=fileData,
+                    position_id=newPosition.id
                 )
 
                 try:
@@ -54,5 +55,5 @@ def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlche
                     db.session.commit()
                 except:
                     return 'ОШИБКА !!! При сохранении изображения в базу.'
-                
-    return render_template('add_new_position.html', categoriesList = categoriesList, autorization = autorization)
+
+    return render_template('add_new_position.html', categoriesList=categoriesList, autorization=autorization)

@@ -1,31 +1,31 @@
 class Autorization():
-        
-        def __init__(self, UserModel):
-            self.isClientLogin: bool = False
-            self.isUserLogin: bool = False
 
-            self.loginName: str = ""
+    def __init__(self, UserModel):
+        self.isClientLogin: bool = False
+        self.isUserLogin: bool = False
 
-            isUsersExist = UserModel.query.all()
-            print("Список существующих администраторов: ", isUsersExist)
+        self.loginName: str = ""
 
-            if len(isUsersExist) == 0:
-                self.loginUser("! Временный администратор !")
+        isUsersExist = UserModel.query.all()
+        print("Список существующих администраторов: ", isUsersExist)
 
-        def logout(self):
-            self.isClientLogin = False
-            self.isUserLogin = False
+        if len(isUsersExist) == 0:
+            self.loginUser("! Временный администратор !")
 
-            self.loginName = ""
+    def logout(self):
+        self.isClientLogin = False
+        self.isUserLogin = False
 
-        def loginClient(self, loginName):
-            self.isClientLogin = True
-            self.isUserLogin = False
+        self.loginName = ""
 
-            self.loginName = loginName
+    def loginClient(self, loginName):
+        self.isClientLogin = True
+        self.isUserLogin = False
 
-        def loginUser(self, loginName):
-            self.isClientLogin = False
-            self.isUserLogin = True
+        self.loginName = loginName
 
-            self.loginName = loginName
+    def loginUser(self, loginName):
+        self.isClientLogin = False
+        self.isUserLogin = True
+
+        self.loginName = loginName

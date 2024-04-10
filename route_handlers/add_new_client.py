@@ -12,9 +12,12 @@ def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization):
         clientEmail = request.form['email']
         clientPassword = request.form['password']
 
-        isClientNameExist = ClientModel.query.filter_by(name=clientName).first()
-        isClientLoginExist = ClientModel.query.filter_by(login=clientLogin).first()
-        isClientEmailExist = ClientModel.query.filter_by(email=clientEmail).first()
+        isClientNameExist = ClientModel.query.filter_by(
+            name=clientName).first()
+        isClientLoginExist = ClientModel.query.filter_by(
+            login=clientLogin).first()
+        isClientEmailExist = ClientModel.query.filter_by(
+            email=clientEmail).first()
 
         if (isClientNameExist != None):
             return 'ОШИБКА !!! Клиент с таким именем существует.'
@@ -24,10 +27,10 @@ def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization):
             return 'ОШИБКА !!! Клиент с таким адресом почты существует.'
 
         newClient = ClientModel(
-            name = clientName,
-            login = clientLogin,
-            email = clientEmail,
-            password_hash = generate_password_hash(clientPassword)
+            name=clientName,
+            login=clientLogin,
+            email=clientEmail,
+            password_hash=generate_password_hash(clientPassword)
         )
 
         try:
@@ -38,4 +41,4 @@ def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization):
         except:
             return 'ОШИБКА !!! При сохранении клиента в базу.'
     else:
-        return render_template('add_new_user.html', autorization = autorization)
+        return render_template('add_new_user.html', autorization=autorization)
