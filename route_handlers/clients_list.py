@@ -28,5 +28,5 @@ def clientsListHandler(ClientModel, db: SQLAlchemy, autorization):
             'login': client.login
         })
 
-    return render_template('clients_list.html', clients=clients, isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+    return render_template('clients_list.html', autorization = autorization)
 

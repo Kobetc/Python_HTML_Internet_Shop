@@ -38,4 +38,4 @@ def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization):
         except:
             return 'ОШИБКА !!! При сохранении клиента в базу.'
     else:
-        return render_template('add_new_user.html', isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+        return render_template('add_new_user.html', autorization = autorization)

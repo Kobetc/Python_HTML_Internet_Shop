@@ -15,10 +15,10 @@ def clientLoginHandler(ClientModel, autorization):
             isPassworValid = check_password_hash(isClientLoginExist.password_hash, userPassword)
 
             if isPassworValid == True:
-                autorization.loginClient(isClientLoginExist.id)
+                autorization.loginClient(isClientLoginExist.name)
 
                 return redirect('/')
 
         
 
-    return render_template('client_login.html', isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+    return render_template('client_login.html', autorization = autorization)

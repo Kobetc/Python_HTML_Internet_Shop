@@ -39,5 +39,5 @@ def positionsListHandler(PositionModel, ImageModel, db: SQLAlchemy, autorization
             'positionImages': positionImages
             })
 
-    return render_template('positions_list.html', positions=positions, isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+    return render_template('positions_list.html', autorization = autorization)
 
