@@ -38,10 +38,41 @@
 
                 <div class="card-footer"
                     style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
-                    <button type="submit" class="w-100 btn btn-m btn-outline-secondary" name="id"
-                        value="{{ image['id'] }}">Удалить изображение</button>
+                    <button type="button" class="w-100 btn btn-m btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#modal_{{ image['id'] }}">Удалить изображение</button>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_{{ image['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Вы действительно хотите удалить изображение ?
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Основной текст модального окна -->
+                    <div class="modal-body">
+                        <h6><b>Id: {{ image['id'] }}, {{ image['name'] }}, {{ image['position'] }}</b></h6>
+                    </div>
+                    <!-- Основной текст модального окна -->
+                    <div class="modal-body">
+                        <div class="card-body" style="height: 300px;">
+                            <img src="data:;base64,{{ image['data'] }}"
+                                style="object-fit: scale-down; max-width: 100%; max-height: 100%" />
+                        </div>
+                    </div>
+                    <!-- Нижний блок с кнопками модального окна -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" value="{{ image['id'] }}"
+                            name="id">Удалить</button>
+                    </div>
+                </div>
             </div>
         </div>
 

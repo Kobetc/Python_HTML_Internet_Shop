@@ -1,8 +1,8 @@
 class Autorization():
         
         def __init__(self):
-            self.isClientLogin: bool = True
-            self.isUserLogin: bool = True
+            self.isClientLogin: bool = False
+            self.isUserLogin: bool = False
 
             self.currentClientId: int = 0
             self.currentUserId: int = 0
