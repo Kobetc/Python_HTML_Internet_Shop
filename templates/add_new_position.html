@@ -26,6 +26,15 @@
             </div>
 
             <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="category_id">Категория позиции</span>
+                <select class="form-select" aria-label="Default select example" name="category_id" id="category_id">
+                    {% for category in categoriesList %}
+                    <option value="{{category['id']}}">{{category['name']}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="price">Цена позиции</span>
                 <input type="number" class="form-control" name="price" id="price" step="0.01" min="0.01" required>
             </div>
