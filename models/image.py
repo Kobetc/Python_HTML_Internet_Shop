@@ -6,10 +6,10 @@ def createImageModel(db: SQLAlchemy):
         
         __tablename__ = 'images'
 
-        id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
-        name = db.Column(db.String(100), unique=False)
-        data = db.Column(db.BLOB, nullable=False)
-        position_id = db.Column(db.Integer())
+        id = db.Column(db.Integer(), primary_key=True)
+        name = db.Column(db.String(100), unique=False, nullable=False)
+        data = db.Column(db.BLOB, unique=False, nullable=False)
+        position_id = db.Column(db.Integer(), unique=False, nullable=False)
 
         def __repr__(self):
             return "<{}:{}>".format(self.id, self.name)
