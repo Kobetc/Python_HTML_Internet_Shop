@@ -15,7 +15,6 @@ def usersListHandler(UserModel, db: SQLAlchemy, autorization):
             db.session.delete(user)
             db.session.commit()
 
-
     UsersFromQuery = UserModel.query.all()
 
     users = []
@@ -23,10 +22,9 @@ def usersListHandler(UserModel, db: SQLAlchemy, autorization):
     for user in UsersFromQuery:
 
         users.append({
-            'id': user.id, 
-            'name': user.name, 
+            'id': user.id,
+            'name': user.name,
             'login': user.login
         })
 
-    return render_template('users_list.html', users = users, autorization = autorization)
-
+    return render_template('users_list.html', users=users, autorization=autorization)

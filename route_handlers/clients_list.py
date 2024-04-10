@@ -15,7 +15,6 @@ def clientsListHandler(ClientModel, db: SQLAlchemy, autorization):
             db.session.delete(client)
             db.session.commit()
 
-
     ClientsFromQuery = ClientModel.query.all()
 
     clients = []
@@ -23,10 +22,9 @@ def clientsListHandler(ClientModel, db: SQLAlchemy, autorization):
     for client in ClientsFromQuery:
 
         clients.append({
-            'id': client.id, 
-            'name': client.name, 
+            'id': client.id,
+            'name': client.name,
             'login': client.login
         })
 
-    return render_template('clients_list.html', clients = clients, autorization = autorization)
-
+    return render_template('clients_list.html', clients=clients, autorization=autorization)

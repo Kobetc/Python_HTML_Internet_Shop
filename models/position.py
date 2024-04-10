@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
+
 def createPositionModel(db: SQLAlchemy):
     class PositionModel(db.Model):
 
@@ -13,5 +14,5 @@ def createPositionModel(db: SQLAlchemy):
 
         def __repr__(self):
             return "<{}:{}>".format(self.id, self.name)
-        
-    return PositionModel  
+
+    return PositionModel

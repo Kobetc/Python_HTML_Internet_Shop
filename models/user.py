@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 def createUserModel(db: SQLAlchemy):
 
     class UserModel(db.Model):
-        
+
         __tablename__ = 'users'
 
         id = db.Column(db.Integer(), primary_key=True)
@@ -15,6 +15,5 @@ def createUserModel(db: SQLAlchemy):
 
         def __repr__(self):
             return "<{}:{}>".format(self.id, self.name, self.email, self.login)
-        
+
     return UserModel
-        

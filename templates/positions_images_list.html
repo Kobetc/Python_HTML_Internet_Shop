@@ -23,12 +23,12 @@
 
                 <div class="card-header"
                     style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
-                    <h5>Id: {{ image['id'] }}, {{ image['name'] }}</h5>
+                    <h5>ID: {{ image['id'] }}, Наименование: {{ image['name'] }}</h5>
                 </div>
 
                 <div class="card-body text-muted"
                     style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
-                    <h6>{{ image['position'] }}</h6>
+                    <h6>Позиция: {{ image['position'] }}</h6>
                 </div>
 
                 <div class="card-body" style="height: 300px;">
@@ -57,7 +57,11 @@
                     </div>
                     <!-- Основной текст модального окна -->
                     <div class="modal-body">
-                        <h6><b>Id: {{ image['id'] }}, {{ image['name'] }}, {{ image['position'] }}</b></h6>
+                        <h6><b>ID: {{ image['id'] }}, Наименование: {{ image['name'] }}</b></h6>
+                    </div>
+                    <!-- Основной текст модального окна -->
+                    <div class="modal-body">
+                        <h6><b>Позиция: {{ image['position'] }}</b></h6>
                     </div>
                     <!-- Основной текст модального окна -->
                     <div class="modal-body">

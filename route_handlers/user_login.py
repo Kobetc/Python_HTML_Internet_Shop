@@ -12,13 +12,12 @@ def userLoginHandler(UserModel, autorization):
         isUserLoginExist = UserModel.query.filter_by(login=userLogin).first()
 
         if isUserLoginExist != None:
-            isPassworValid = check_password_hash(isUserLoginExist.password_hash, userPassword)
+            isPassworValid = check_password_hash(
+                isUserLoginExist.password_hash, userPassword)
 
             if isPassworValid == True:
                 autorization.loginUser(isUserLoginExist.name)
 
                 return redirect('/')
 
-        
-
-    return render_template('user_login.html', autorization = autorization)
+    return render_template('user_login.html', autorization=autorization)

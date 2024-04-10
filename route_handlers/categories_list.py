@@ -15,7 +15,6 @@ def categoriesListHandler(CategoryModel, db: SQLAlchemy, autorization):
             db.session.delete(category)
             db.session.commit()
 
-
     CategoriesFromQuery = CategoryModel.query.all()
 
     categories = []
@@ -23,10 +22,9 @@ def categoriesListHandler(CategoryModel, db: SQLAlchemy, autorization):
     for category in CategoriesFromQuery:
 
         categories.append({
-            'id': category.id, 
-            'name': category.name, 
+            'id': category.id,
+            'name': category.name,
             'discription': category.discription
         })
 
-    return render_template('categories_list.html', categories = categories, autorization = autorization)
-
+    return render_template('categories_list.html', categories=categories, autorization=autorization)
