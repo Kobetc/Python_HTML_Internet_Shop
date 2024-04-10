@@ -34,5 +34,5 @@ def positionsImagesListHandler(ImageModel, PositionModel, db: SQLAlchemy, autori
             'data': base64.b64encode(image.data).decode('ascii')
         })
 
-    return render_template('positions_images_list.html', images=images, isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+    return render_template('positions_images_list.html', autorization = autorization)
 

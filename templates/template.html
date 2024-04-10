@@ -27,7 +27,7 @@
                     <a class="py-2 link-body-emphasis text-decoration-none" href="/about" style="margin-right: 100px;">О
                         сайте</a>
 
-                    {% if isUserLogin == False and isClientLogin == False %}
+                    {% if autorization.isUserLogin == False and autorization.isClientLogin == False %}
 
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/client_login"
                         style="text-align: end;">Вход
@@ -39,7 +39,8 @@
 
                     {% else %}
 
-                    <a class="py-2 link-body-emphasis text-decoration-none" href="/logout">Выход</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="/logout">Выход
+                        ({{autorization.loginName}})</a>
 
                     {% endif %}
                 </nav>
@@ -58,7 +59,7 @@
                     <small class="d-block mb-3 text-body-secondary">© 2024</small>
                 </div>
 
-                {% if isUserLogin == True %}
+                {% if autorization.isUserLogin == True %}
 
                 <div class="col-6 col-md" style="text-align: end;">
                     <h5>Добавление элементов</h5>
@@ -105,9 +106,9 @@
                         <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Список позиций</a></li>
                         <li class="mb-3"><a class="link-secondary text-decoration-none" href="/about">О сайте</a></li>
 
-                        {% if isUserLogin == False and isClientLogin == False %}
+                        {% if autorization.isUserLogin == False and autorization.isClientLogin == False %}
 
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Вход как покупател</a>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="/">Вход как покупатель</a>
                         </li>
                         <li class="mb-3"><a class="link-secondary text-decoration-none" href="/user_login">Вход как
                                 администратор</a></li>

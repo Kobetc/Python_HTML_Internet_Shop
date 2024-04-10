@@ -4,26 +4,22 @@ class Autorization():
             self.isClientLogin: bool = False
             self.isUserLogin: bool = False
 
-            self.currentClientId: int = 0
-            self.currentUserId: int = 0
+            self.loginName: str = ""
 
         def logout(self):
             self.isClientLogin = False
             self.isUserLogin = False
 
-            self.currentClientId = 0
-            self.currentUserId = 0
+            self.loginName = ""
 
-        def loginClient(self, clientId):
+        def loginClient(self, loginName):
             self.isClientLogin = True
             self.isUserLogin = False
 
-            self.currentClientId = clientId
-            self.currentUserId = 0
+            self.loginName = loginName
 
-        def loginUser(self, userId):
+        def loginUser(self, loginName):
             self.isClientLogin = False
             self.isUserLogin = True
 
-            self.currentClientId = 0
-            self.currentUserId = userId
+            self.loginName = loginName

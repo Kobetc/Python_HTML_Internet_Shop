@@ -48,11 +48,11 @@ ClientModel = createClientModel(db)
 
 @app.route('/')
 def home_page():
-    return render_template('index.html', isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+    return render_template('index.html', autorization = autorization)
 
 @app.route('/about')
 def about_page():
-    return render_template('about.html', isUserLogin=autorization.isUserLogin, isClientLogin=autorization.isClientLogin)
+    return render_template('about.html', autorization = autorization)
 
 
 #
