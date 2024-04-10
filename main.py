@@ -5,13 +5,16 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from autorization import Autorization
+from models.category import createCategoryModel
 from models.client import createClientModel
 from models.image import createImageModel
 from models.position import createPositionModel
 from models.user import createUserModel
+from route_handlers.add_new_category import addNewCategoryHandler
 from route_handlers.add_new_client import addNewClientHandler
 from route_handlers.add_new_position import addNewPositionHandler
 from route_handlers.add_new_user import addNewUserHandler
+from route_handlers.categories_list import categoriesListHandler
 from route_handlers.client_login import clientLoginHandler
 from route_handlers.clients_list import clientsListHandler
 from route_handlers.positions_images_list import positionsImagesListHandler
@@ -31,16 +34,21 @@ db = SQLAlchemy(app)
 
 app.app_context().push()
 
-autorization = Autorization() 
-
 ###
 ### DB Models ###
 ###
 
+CategoryModel = createCategoryModel(db)
 ImageModel = createImageModel(db)
 PositionModel = createPositionModel(db)
 UserModel = createUserModel(db)
 ClientModel = createClientModel(db)
+
+###
+### Авторизация ###
+###
+
+autorization = Autorization(UserModel) 
 
 ###
 ### Routes ###
@@ -54,6 +62,21 @@ def home_page():
 def about_page():
     return render_template('about.html', autorization = autorization)
 
+#
+# Добавление новой категории
+#
+
+@app.route('/add_new_category', methods=[ 'POST', 'GET'])
+def addNewCategory():
+    return addNewCategoryHandler(CategoryModel, db, autorization)
+
+#
+# Список категорий
+#
+
+@app.route('/categories_list', methods=[ 'POST', 'GET'])
+def categoriesList():
+    return  categoriesListHandler(CategoryModel, db, autorization)
 
 #
 # Добавление новой позиции

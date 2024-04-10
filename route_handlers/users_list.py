@@ -28,5 +28,5 @@ def usersListHandler(UserModel, db: SQLAlchemy, autorization):
             'login': user.login
         })
 
-    return render_template('users_list.html', autorization = autorization)
+    return render_template('users_list.html', users = users, autorization = autorization)
 

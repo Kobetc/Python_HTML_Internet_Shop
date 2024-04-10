@@ -1,0 +1,33 @@
+{% extends 'template.html' %}
+
+{% block title %}
+<title>Интернет-магазин - Добавление новой категории</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="row p-3">
+    <div class="col p-3">
+        <h1>Добавление новой категории</h1>
+    </div>
+</div>
+
+<div class="row p-3">
+    <div class="col col-m p-3">
+        <form method="post" class="needs-validation">
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="name">Имя категории</span>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text" id="discription">Описание категории</span>
+                <textarea class="form-control" name="discription" id="discription" rows="5" required></textarea>
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <button type="submit" class="btn btn-primary mb-3">Создать категорию</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

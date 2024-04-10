@@ -1,0 +1,75 @@
+{% extends 'template.html' %}
+
+{% block title %}
+<title>Интернет-магазин - Просмотр списка категорий</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="row p-3">
+    <div class="col p-3">
+        <h3>Просмотр списка категорий</h3>
+    </div>
+</div>
+
+<form method="post">
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center g-3">
+
+        {% for category in categories %}
+
+        <div class="col">
+            <div class="card mb-3 rounded-3 shadow-sm text-center">
+
+                <div class="card-header"
+                    style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <h5>Id: {{ category['id'] }}, {{ category['name'] }}</h5>
+                </div>
+
+                <div class="card-body text-muted"
+                    style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <h6>{{ category['discription'] }}</h6>
+                </div>
+
+                <div class="card-footer"
+                    style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <button type="button" class="w-100 btn btn-m btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#modal_{{ category['id'] }}">Удалить категорию</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_{{ category['id'] }}" tabindex="-1" aria-labelledby="modalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Вы действительно хотите удалить категорию ?
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Основной текст модального окна -->
+                    <div class="modal-body">
+                        <h6><b>Id: {{ category['id'] }}, {{ category['name'] }}</b></h6>
+                    </div>
+                    <!-- Основной текст модального окна -->
+                    <div class="modal-body">
+                        <h6>{{ category['discription'] }}</h6>
+                    </div>
+                    <!-- Нижний блок с кнопками модального окна -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" name="id"
+                            value="{{ category['id'] }}">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</form>
+
+{% endblock %}
