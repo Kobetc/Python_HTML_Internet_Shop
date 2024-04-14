@@ -4,7 +4,7 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def categoriesListHandler(CategoryModel, db: SQLAlchemy, autorization):
+def categoriesListHandler(CategoryModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
         categoryId = request.form['id']
@@ -31,4 +31,4 @@ def categoriesListHandler(CategoryModel, db: SQLAlchemy, autorization):
             'categoryImage': categoryImage
         })
 
-    return render_template('categories_list.html', categories=categories, autorization=autorization)
+    return render_template('categories_list.html', categories=categories, autorization=autorization, basket=basket)

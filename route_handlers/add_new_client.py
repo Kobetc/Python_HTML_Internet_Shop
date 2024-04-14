@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization):
+def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
         clientName = request.form['name']
@@ -41,4 +41,4 @@ def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization):
         except:
             return 'ОШИБКА !!! При сохранении клиента в базу.'
     else:
-        return render_template('add_new_user.html', autorization=autorization)
+        return render_template('add_new_user.html', autorization=autorization, basket=basket)

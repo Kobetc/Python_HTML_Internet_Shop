@@ -3,7 +3,7 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization):
+def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization, basket):
 
     categoriesList = CategoryModel.query.all()
 
@@ -55,4 +55,4 @@ def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlche
                 except:
                     return 'ОШИБКА !!! При сохранении изображения в базу.'
 
-    return render_template('add_new_position.html', categoriesList=categoriesList, autorization=autorization)
+    return render_template('add_new_position.html', categoriesList=categoriesList, autorization=autorization, basket=basket)
