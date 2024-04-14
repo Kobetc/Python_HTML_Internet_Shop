@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization):
 
     categoriesList = CategoryModel.query.all()
-    print(categoriesList)
 
     if request.method == 'POST':
         images = list(request.files.listvalues())[0]

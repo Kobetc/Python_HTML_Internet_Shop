@@ -7,8 +7,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def addNewCategoryHandler(CategoryModel, db: SQLAlchemy, autorization):
 
     if request.method == 'POST':
+
         categoryName = request.form['name']
         categoryDiscription = request.form['discription']
+        image = list(request.files.listvalues())[0]
+        fileData = image[0].read()
 
         isCategoryNameExist = CategoryModel.query.filter_by(
             name=categoryName).first()
@@ -19,13 +22,14 @@ def addNewCategoryHandler(CategoryModel, db: SQLAlchemy, autorization):
         newCategory = CategoryModel(
             name=categoryName,
             discription=categoryDiscription,
+            image=fileData
         )
 
         try:
             db.session.add(newCategory)
             db.session.commit()
 
-            return redirect('/')
+            return render_template('add_new_category.html', autorization=autorization)
         except:
             return 'ОШИБКА !!! При сохранении категории в базу.'
     else:

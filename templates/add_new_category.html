@@ -14,15 +14,21 @@
 
 <div class="row p-3">
     <div class="col col-m p-3">
-        <form method="post" class="needs-validation">
+        <form method="post" enctype="multipart/form-data" class="needs-validation">
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="name">Имя категории</span>
                 <input type="text" class="form-control" name="name" id="name" required>
             </div>
+
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text" id="discription">Описание категории</span>
                 <textarea class="form-control" name="discription" id="discription" rows="5" required></textarea>
             </div>
+
+            <div class=" input-group flex-nowrap mb-3">
+                <input class="form-control" type="file" name="categoryImage" id="categoryImage" accept=".jpg" required>
+            </div>
+
             <div class="input-group flex-nowrap mb-3">
                 <button type="submit" class="btn btn-primary mb-3">Создать категорию</button>
             </div>
