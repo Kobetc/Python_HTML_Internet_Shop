@@ -1,24 +1,26 @@
 import os
 from typing import Type
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-from werkzeug.security import generate_password_hash, check_password_hash
-
 from autorization import Autorization
+
 from models.basket import createBasketModel
 from models.category import createCategoryModel
 from models.client import createClientModel
 from models.image import createImageModel
 from models.position import createPositionModel
 from models.user import createUserModel
+
 from route_handlers.add_new_category import addNewCategoryHandler
 from route_handlers.add_new_client import addNewClientHandler
 from route_handlers.add_new_position import addNewPositionHandler
 from route_handlers.add_new_user import addNewUserHandler
+from route_handlers.categories import categoriesHandler
 from route_handlers.categories_list import categoriesListHandler
 from route_handlers.client_login import clientLoginHandler
 from route_handlers.clients_list import clientsListHandler
+from route_handlers.category import categoryHandler
 from route_handlers.positions_images_list import positionsImagesListHandler
 from route_handlers.positions_list import positionsListHandler
 from route_handlers.user_login import userLoginHandler
@@ -178,6 +180,25 @@ def clientLogin():
 @app.route('/clients_list', methods=['POST', 'GET'])
 def clientsList():
     return clientsListHandler(ClientModel, db, autorization)
+
+
+#
+# Список категорий товаров
+#
+
+
+@app.route('/categories', methods=['POST', 'GET'])
+def categories():
+    return categoriesHandler(CategoryModel, PositionModel, autorization)
+
+#
+# Список товаров выбранной категории
+#
+
+
+@app.route('/category/<int:id>', methods=['POST', 'GET'])
+def category(id: int):
+    return categoryHandler(id, PositionModel, ImageModel, CategoryModel, db, autorization)
 
 
 if __name__ == '__main__':

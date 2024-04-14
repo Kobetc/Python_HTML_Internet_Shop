@@ -21,10 +21,14 @@ def categoriesListHandler(CategoryModel, db: SQLAlchemy, autorization):
 
     for category in CategoriesFromQuery:
 
+        categoryImage = base64.b64encode(
+            category.image).decode('ascii')
+
         categories.append({
             'id': category.id,
             'name': category.name,
-            'discription': category.discription
+            'discription': category.discription,
+            'categoryImage': categoryImage
         })
 
     return render_template('categories_list.html', categories=categories, autorization=autorization)
