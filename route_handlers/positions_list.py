@@ -4,7 +4,7 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def positionsListHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization):
+def positionsListHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
         positionId = request.form['id']
@@ -48,4 +48,4 @@ def positionsListHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchem
             'positionImages': positionImages
         })
 
-    return render_template('positions_list.html', positions=positions, autorization=autorization)
+    return render_template('positions_list.html', positions=positions, autorization=autorization, basket=basket)

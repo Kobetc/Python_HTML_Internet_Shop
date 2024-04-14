@@ -4,6 +4,7 @@ from flask import Flask, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 from autorization import Autorization
+from basket import Basket
 
 from models.basket import createBasketModel
 from models.category import createCategoryModel
@@ -16,6 +17,7 @@ from route_handlers.add_new_category import addNewCategoryHandler
 from route_handlers.add_new_client import addNewClientHandler
 from route_handlers.add_new_position import addNewPositionHandler
 from route_handlers.add_new_user import addNewUserHandler
+from route_handlers.cart import cartHandler
 from route_handlers.categories import categoriesHandler
 from route_handlers.categories_list import categoriesListHandler
 from route_handlers.client_login import clientLoginHandler
@@ -57,18 +59,24 @@ ClientModel = createClientModel(db)
 autorization = Autorization(UserModel)
 
 ###
+### Корзина товаров ###
+###
+
+basket = Basket()
+
+###
 ### Routes ###
 ###
 
 
 @app.route('/')
 def home_page():
-    return render_template('index.html', autorization=autorization)
+    return render_template('index.html', autorization=autorization, basket=basket)
 
 
 @app.route('/about')
 def about_page():
-    return render_template('about.html', autorization=autorization)
+    return render_template('about.html', autorization=autorization, basket=basket)
 
 #
 # Добавление новой категории
@@ -77,7 +85,7 @@ def about_page():
 
 @app.route('/add_new_category', methods=['POST', 'GET'])
 def addNewCategory():
-    return addNewCategoryHandler(CategoryModel, db, autorization)
+    return addNewCategoryHandler(CategoryModel, db, autorization, basket)
 
 #
 # Список категорий
@@ -86,7 +94,7 @@ def addNewCategory():
 
 @app.route('/categories_list', methods=['POST', 'GET'])
 def categoriesList():
-    return categoriesListHandler(CategoryModel, db, autorization)
+    return categoriesListHandler(CategoryModel, db, autorization, basket)
 
 #
 # Добавление новой позиции
@@ -95,7 +103,7 @@ def categoriesList():
 
 @app.route('/add_new_position', methods=['POST', 'GET'])
 def addNewPosition():
-    return addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db, autorization)
+    return addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db, autorization, basket)
 
 #
 # Список изображений всех позиций
@@ -104,7 +112,7 @@ def addNewPosition():
 
 @app.route('/positions_images_list', methods=['POST', 'GET'])
 def positionsImagesList():
-    return positionsImagesListHandler(ImageModel, PositionModel, db, autorization)
+    return positionsImagesListHandler(ImageModel, PositionModel, db, autorization, basket)
 
 #
 # Список всех позиций
@@ -113,7 +121,7 @@ def positionsImagesList():
 
 @app.route('/positions_list', methods=['POST', 'GET'])
 def positionsList():
-    return positionsListHandler(PositionModel, ImageModel, CategoryModel, db, autorization)
+    return positionsListHandler(PositionModel, ImageModel, CategoryModel, db, autorization, basket)
 
 #
 # Разлогин пользователя или покупателя
@@ -134,7 +142,7 @@ def unlogin():
 
 @app.route('/add_new_user', methods=['POST', 'GET'])
 def addNewUser():
-    return addNewUserHandler(UserModel, db, autorization)
+    return addNewUserHandler(UserModel, db, autorization, basket)
 
 
 #
@@ -143,7 +151,7 @@ def addNewUser():
 
 @app.route('/user_login', methods=['POST', 'GET'])
 def userLogin():
-    return userLoginHandler(UserModel, autorization)
+    return userLoginHandler(UserModel, autorization, basket)
 
 #
 # Список администраторов
@@ -152,7 +160,7 @@ def userLogin():
 
 @app.route('/users_list', methods=['POST', 'GET'])
 def usersList():
-    return usersListHandler(UserModel, db, autorization)
+    return usersListHandler(UserModel, db, autorization, basket)
 
 #
 # Добавление нового клиента
@@ -161,7 +169,7 @@ def usersList():
 
 @app.route('/add_new_client', methods=['POST', 'GET'])
 def addNewClient():
-    return addNewClientHandler(ClientModel, db, autorization)
+    return addNewClientHandler(ClientModel, db, autorization, basket)
 
 
 #
@@ -170,7 +178,7 @@ def addNewClient():
 
 @app.route('/client_login', methods=['POST', 'GET'])
 def clientLogin():
-    return clientLoginHandler(ClientModel, autorization)
+    return clientLoginHandler(ClientModel, autorization, basket)
 
 #
 # Список клиентов
@@ -179,7 +187,7 @@ def clientLogin():
 
 @app.route('/clients_list', methods=['POST', 'GET'])
 def clientsList():
-    return clientsListHandler(ClientModel, db, autorization)
+    return clientsListHandler(ClientModel, db, autorization, basket)
 
 
 #
@@ -189,7 +197,7 @@ def clientsList():
 
 @app.route('/categories', methods=['POST', 'GET'])
 def categories():
-    return categoriesHandler(CategoryModel, PositionModel, autorization)
+    return categoriesHandler(CategoryModel, autorization, basket)
 
 #
 # Список товаров выбранной категории
@@ -198,7 +206,16 @@ def categories():
 
 @app.route('/category/<int:id>', methods=['POST', 'GET'])
 def category(id: int):
-    return categoryHandler(id, PositionModel, ImageModel, CategoryModel, db, autorization)
+    return categoryHandler(id, PositionModel, ImageModel, CategoryModel, autorization, basket)
+
+#
+# Корзина
+#
+
+
+@app.route('/cart', methods=['POST', 'GET'])
+def cart():
+    return cartHandler(autorization, basket)
 
 
 if __name__ == '__main__':

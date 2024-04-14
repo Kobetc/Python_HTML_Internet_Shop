@@ -3,7 +3,7 @@ from flask import redirect, render_template, request
 from werkzeug.security import check_password_hash
 
 
-def userLoginHandler(UserModel, autorization):
+def userLoginHandler(UserModel, autorization, basket):
 
     if request.method == 'POST':
         userLogin = request.form['login']
@@ -20,4 +20,4 @@ def userLoginHandler(UserModel, autorization):
 
                 return redirect('/')
 
-    return render_template('user_login.html', autorization=autorization)
+    return render_template('user_login.html', autorization=autorization, basket=basket)

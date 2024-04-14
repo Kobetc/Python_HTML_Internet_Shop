@@ -4,7 +4,7 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def clientsListHandler(ClientModel, db: SQLAlchemy, autorization):
+def clientsListHandler(ClientModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
         clientId = request.form['id']
@@ -27,4 +27,4 @@ def clientsListHandler(ClientModel, db: SQLAlchemy, autorization):
             'login': client.login
         })
 
-    return render_template('clients_list.html', clients=clients, autorization=autorization)
+    return render_template('clients_list.html', clients=clients, autorization=autorization, basket=basket)

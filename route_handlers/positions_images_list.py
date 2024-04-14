@@ -4,7 +4,7 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
-def positionsImagesListHandler(ImageModel, PositionModel, db: SQLAlchemy, autorization):
+def positionsImagesListHandler(ImageModel, PositionModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
         imageId = request.form['id']
@@ -34,4 +34,4 @@ def positionsImagesListHandler(ImageModel, PositionModel, db: SQLAlchemy, autori
             'data': base64.b64encode(image.data).decode('ascii')
         })
 
-    return render_template('positions_images_list.html', images=images, autorization=autorization)
+    return render_template('positions_images_list.html', images=images, autorization=autorization, basket=basket)

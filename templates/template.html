@@ -37,10 +37,14 @@
                         style="text-align: end;">Вход
                         как администратор</a>
 
+
+
                     {% else %}
 
                     <a class="py-2 link-body-emphasis text-decoration-none" href="/logout">Выход
                         ({{autorization.loginName}})</a>
+                    <a class="py-2 ms-3 link-body-emphasis text-decoration-none" href="/cart"><b>В корзине товаров: {{
+                            basket.basketLen }} (общая стоимость {{ basket.basketPrice }} руб.)</b></a>
 
                     {% endif %}
                 </nav>

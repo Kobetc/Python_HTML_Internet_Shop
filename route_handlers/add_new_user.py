@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-def addNewUserHandler(UserModel, db: SQLAlchemy, autorization):
+def addNewUserHandler(UserModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
         userName = request.form['name']
@@ -38,4 +38,4 @@ def addNewUserHandler(UserModel, db: SQLAlchemy, autorization):
         except:
             return 'ОШИБКА !!! При сохранении пользователя в базу.'
     else:
-        return render_template('add_new_user.html', autorization=autorization)
+        return render_template('add_new_user.html', autorization=autorization, basket=basket)

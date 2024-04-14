@@ -1,13 +1,22 @@
 import base64
 
 from flask import render_template, request
-from flask_sqlalchemy import SQLAlchemy
+
+from autorization import Autorization
+from basket import Basket
 
 
-def categoryHandler(id: int, PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization):
+def categoryHandler(id, PositionModel, ImageModel, CategoryModel, autorization: Autorization, basket: Basket):
 
     if request.method == 'POST':
-        pass
+        positionId = request.form['id']
+
+        position = PositionModel.query.filter_by(id=positionId).first()
+
+        print(position, basket)
+
+        if position != None:
+            basket.addPositionToBasket(position)
 
     positionsFromQuery = PositionModel.query.filter_by(
         category_id=id).all()
@@ -43,4 +52,4 @@ def categoryHandler(id: int, PositionModel, ImageModel, CategoryModel, db: SQLAl
             'positionImages': positionImages
         })
 
-    return render_template('category.html', positions=positions, autorization=autorization)
+    return render_template('category.html', positions=positions, autorization=autorization, basket=basket)
