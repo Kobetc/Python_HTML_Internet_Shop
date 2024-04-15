@@ -7,10 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
-        clientName = request.form['name']
-        clientLogin = request.form['login']
-        clientEmail = request.form['email']
-        clientPassword = request.form['password']
+        clientName = request.form.get('name')
+        clientLogin = request.form.get('login')
+        clientEmail = request.form.get('email')
+        clientPassword = request.form.get('password')
 
         isClientNameExist = ClientModel.query.filter_by(
             name=clientName).first()

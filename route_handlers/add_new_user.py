@@ -7,10 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def addNewUserHandler(UserModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
-        userName = request.form['name']
-        userLogin = request.form['login']
-        userEmail = request.form['email']
-        userPassword = request.form['password']
+        userName = request.form.get('name')
+        userLogin = request.form.get('login')
+        userEmail = request.form.get('email')
+        userPassword = request.form.get('password')
 
         isUserNameExist = UserModel.query.filter_by(name=userName).first()
         isUserLoginExist = UserModel.query.filter_by(login=userLogin).first()

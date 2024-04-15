@@ -13,8 +13,6 @@ def categoryHandler(id, PositionModel, ImageModel, CategoryModel, autorization: 
 
         position = PositionModel.query.filter_by(id=positionId).first()
 
-        print(position, basket)
-
         if position != None:
             basket.addPositionToBasket(position)
 

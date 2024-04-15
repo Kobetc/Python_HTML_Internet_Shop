@@ -8,8 +8,8 @@ def addNewCategoryHandler(CategoryModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
 
-        categoryName = request.form['name']
-        categoryDiscription = request.form['discription']
+        categoryName = request.form.get('name')
+        categoryDiscription = request.form.get('discription')
         image = list(request.files.listvalues())[0]
         fileData = image[0].read()
 

@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 def positionsListHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
-        positionId = request.form['id']
+        positionId = request.form.get('id')
 
         position = PositionModel.query.filter_by(id=positionId).first()
 

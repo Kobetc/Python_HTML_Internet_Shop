@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 def usersListHandler(UserModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
-        userId = request.form['id']
+        userId = request.form.get('id')
 
         user = UserModel.query.filter_by(id=userId).first()
 
