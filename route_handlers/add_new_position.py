@@ -10,10 +10,10 @@ def addNewPositionHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlche
     if request.method == 'POST':
         images = list(request.files.listvalues())[0]
 
-        positionName = request.form['name']
-        positionDiscription = request.form['discription']
-        positionPrice = request.form['price']
-        positionCategoryId = request.form['category_id']
+        positionName = request.form.get('name')
+        positionDiscription = request.form.get('discription')
+        positionPrice = request.form.get('price')
+        positionCategoryId = request.form.get('category_id')
 
         isUserPositionExist = PositionModel.query.filter_by(
             name=positionName).first()

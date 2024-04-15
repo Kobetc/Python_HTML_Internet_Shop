@@ -6,8 +6,8 @@ from werkzeug.security import check_password_hash
 def clientLoginHandler(ClientModel, autorization, basket):
 
     if request.method == 'POST':
-        userLogin = request.form['login']
-        userPassword = request.form['password']
+        userLogin = request.form.get('login')
+        userPassword = request.form.get('password')
 
         isClientLoginExist = ClientModel.query.filter_by(
             login=userLogin).first()

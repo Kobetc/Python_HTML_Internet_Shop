@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 def clientsListHandler(ClientModel, db: SQLAlchemy, autorization, basket):
 
     if request.method == 'POST':
-        clientId = request.form['id']
+        clientId = request.form.get('id')
 
         client = ClientModel.query.filter_by(id=clientId).first()
 
