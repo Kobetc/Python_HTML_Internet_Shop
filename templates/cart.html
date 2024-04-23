@@ -52,8 +52,8 @@
                             <button type="submit" class="btn btn-outline-secondary ms-1" style="width: 40px;"
                                 name="minus" value="{{ positionId }}">-</button>
                         </td>
-                        <td><button type="submit" class="btn btn-secondary" name="id"
-                                value="{{ positionId }}">Удалить</button></td>
+                        <td><button type="submit" class="btn btn-secondary" name="id" value="{{ positionId }}"
+                                style="width: 100%;">Удалить</button></td>
 
                     </tr>
 
@@ -71,10 +71,25 @@
                         <td></td>
                         <td>{{ basket.basketPrice }}</td>
                         <td></td>
-                        <td><button type="submit" class="btn btn-primary" name="id" value="{{ -1 }}">Очистить</button>
+                        <td><button type="submit" class="btn btn-primary" name="clean" value="-1"
+                                style="width: 100%;">Очистить</button>
                         </td>
 
 
+                    </tr>
+
+                    <tr>
+                        <th colspan="6" scope="row"> </th>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <div style="width: 100%;">
+                                <button type="submit" class="btn btn-outline-success" name="pay" value="-1"
+                                    style="width: 100%;">
+                                    Оплатить
+                                </button>
+                            </div>
+                        </td>
                     </tr>
 
                 </tbody>
@@ -82,6 +97,8 @@
 
         </div>
     </div>
+
 </form>
+
 
 {% endblock %}

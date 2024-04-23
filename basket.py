@@ -11,6 +11,7 @@ class Basket():
         self.basketPrice = 0
 
     def clearBasketPosition(self, positionId):
+
         if str(positionId) in self.basket:
             del self.basket[str(positionId)]
 
