@@ -1,6 +1,6 @@
 import os
 from typing import Type
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from autorization import Autorization
