@@ -10,10 +10,16 @@ def positionsListHandler(PositionModel, ImageModel, CategoryModel, db: SQLAlchem
         positionId = request.form.get('id')
 
         position = PositionModel.query.filter_by(id=positionId).first()
+        positionImages = ImageModel.query.filter_by(
+            position_id=positionId).all()
 
         if (position != None):
             db.session.delete(position)
-            db.session.commit()
+
+        for image in positionImages:
+            db.session.delete(image)
+
+        db.session.commit()
 
     positionsFromQuery = PositionModel.query.all()
 
