@@ -12,6 +12,17 @@
     </div>
 </div>
 
+{% if categories|length == 0 %}
+
+<div class="row p-3">
+    <div class="col p-3">
+        <h4>Список категорий пуст</h4>
+    </div>
+</div>
+
+{% endif %}
+
+
 <form method="post">
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center g-3">
@@ -28,7 +39,7 @@
 
                 <div class="card-body text-muted"
                     style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
-                    <h6>Описание: {{ category['discription'] }}</h6>
+                    <h6 style="text-align: justify;">Описание: {{ category['discription'] }}</h6>
                 </div>
 
                 <div class="card-body text-muted"
@@ -62,7 +73,7 @@
                     </div>
                     <!-- Основной текст модального окна -->
                     <div class="modal-body">
-                        <h6>Описание: {{ category['discription'] }}</h6>
+                        <h6 style="text-align: justify;">Описание: {{ category['discription'] }}</h6>
                     </div>
 
                     <div class="card-body text-muted"
