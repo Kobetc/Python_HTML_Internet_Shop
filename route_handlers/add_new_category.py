@@ -1,8 +1,6 @@
 from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-from werkzeug.security import generate_password_hash, check_password_hash
-
 
 def addNewCategoryHandler(CategoryModel, db: SQLAlchemy, autorization, basket):
 
