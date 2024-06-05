@@ -43,3 +43,21 @@ def test_about_page():
 
     assert "<title>Интернет-магазин - О сайте</title>" in response.get_data(
         as_text=True)
+
+    # Проверка доступности страницы входа клиента
+
+
+def test_client_login_page():
+    response = app.test_client().get('/client_login')
+
+    assert "<title>Интернет-магазин - Вход клиента</title>" in response.get_data(
+        as_text=True)
+
+    # Проверка доступности страницы входа администратора
+
+
+def test_user_login_page():
+    response = app.test_client().get('/user_login')
+
+    assert "<title>Интернет-магазин - Вход администратора</title>" in response.get_data(
+        as_text=True)
