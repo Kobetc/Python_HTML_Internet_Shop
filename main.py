@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from autorization import Autorization
 from basket import Basket
 
-from models.basket import createBasketModel
 from models.category import createCategoryModel
 from models.client import createClientModel
 from models.image import createImageModel
@@ -44,12 +43,19 @@ app.app_context().push()
 ### DB Models ###
 ###
 
-BasketModel = createBasketModel(db)
 CategoryModel = createCategoryModel(db)
 ImageModel = createImageModel(db)
 PositionModel = createPositionModel(db)
 UserModel = createUserModel(db)
 ClientModel = createClientModel(db)
+
+for user in UserModel.query.all():
+    db.session.delete(user)
+
+for client in ClientModel.query.all():
+    db.session.delete(client)
+
+db.session.commit()
 
 ###
 ### Авторизация ###
