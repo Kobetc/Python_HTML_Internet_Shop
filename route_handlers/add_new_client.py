@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 
 
 def addNewClientHandler(ClientModel, db: SQLAlchemy, autorization, basket):
