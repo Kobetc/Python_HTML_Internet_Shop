@@ -4,7 +4,7 @@ from main import CategoryModel, ClientModel, PositionModel, app, db
 from main import UserModel
 
 
-def test_add_new_user_route():
+def test_user_routes():
 
     userName = 'userName'
     userLogin = 'userLogin'
@@ -24,12 +24,15 @@ def test_add_new_user_route():
 
         assert UserModel.query.filter_by(name=userName).first() != None
 
+    response = app.test_client().get('/users_list')
+    assert userName in response.get_data(as_text=True)
+
     testUser = UserModel.query.filter_by(name=userName).first()
     db.session.delete(testUser)
     db.session.commit()
 
 
-def test_add_new_client_route():
+def test_client_routes():
 
     clientName = 'clientName'
     clientLogin = 'clientLogin'
@@ -49,12 +52,15 @@ def test_add_new_client_route():
 
         assert ClientModel.query.filter_by(name=clientName).first() != None
 
+    response = app.test_client().get('/clients_list')
+    assert clientName in response.get_data(as_text=True)
+
     testClient = ClientModel.query.filter_by(name=clientName).first()
     db.session.delete(testClient)
     db.session.commit()
 
 
-def test_add_new_category_route():
+def test_category_routes():
 
     categoryName = 'categoryName'
     categoryDiscription = 'categoryDiscription'
@@ -72,12 +78,18 @@ def test_add_new_category_route():
 
         assert CategoryModel.query.filter_by(name=categoryName).first() != None
 
+    response = app.test_client().get('/categories')
+    assert categoryName in response.get_data(as_text=True)
+
+    response = app.test_client().get('/categories_list')
+    assert categoryName in response.get_data(as_text=True)
+
     testCategory = CategoryModel.query.filter_by(name=categoryName).first()
     db.session.delete(testCategory)
     db.session.commit()
 
 
-def test_add_new_positiont_route():
+def test_positiont_routes():
 
     positionName = 'positionName'
     positionDiscription = 'positionDiscription'
@@ -100,6 +112,9 @@ def test_add_new_positiont_route():
         assert PositionModel.query.filter_by(name=positionName).first() != None
 
     response = app.test_client().get('/category/1')
+    assert positionName in response.get_data(as_text=True)
+
+    response = app.test_client().get('/positions_list')
     assert positionName in response.get_data(as_text=True)
 
     testPosition = PositionModel.query.filter_by(name=positionName).first()
