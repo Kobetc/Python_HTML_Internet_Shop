@@ -49,6 +49,9 @@ PositionModel = createPositionModel(db)
 UserModel = createUserModel(db)
 ClientModel = createClientModel(db)
 
+for image in ImageModel.query.all():
+    db.session.delete(image)
+
 for user in UserModel.query.all():
     db.session.delete(user)
 
