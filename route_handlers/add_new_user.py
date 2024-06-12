@@ -40,8 +40,6 @@ def addNewUserHandler(UserModel, db: SQLAlchemy, autorization, basket):
             login=userLogin,
             email=userEmail,
             password_hash=generate_password_hash(userPassword)
-
-
         )
 
         # Пытаемся добавить нового пользователя в базу данных
