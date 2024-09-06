@@ -1,6 +1,8 @@
 import os
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+
+from werkzeug.security import generate_password_hash
 
 from autorization import Autorization
 from basket import Basket
@@ -58,6 +60,24 @@ for user in UserModel.query.all():
 for client in ClientModel.query.all():
     db.session.delete(client)
 
+db.session.commit()
+
+newUser = UserModel(
+    name="admin",
+    login="admin",
+    email="admin@admin.com",
+    password_hash=generate_password_hash("admin")
+)
+
+newClient = ClientModel(
+    name="user",
+    login="user",
+    email="user@user.com",
+    password_hash=generate_password_hash("user")
+)
+
+db.session.add(newUser)
+db.session.add(newClient)
 db.session.commit()
 
 ###
